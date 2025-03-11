@@ -1,24 +1,23 @@
 package org.example.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Laptop {
     @Id
     private int lid;
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "stundet_id")
-    private Student student;
+    @ManyToMany(mappedBy = "laptops")
+    private List<Student>students;
 
     public Laptop() {}
-    public Laptop(int lid, String name, Student student) {
+
+    public Laptop(int lid, String name, List<Student> students) {
         this.lid = lid;
         this.name = name;
-        this.student = student;
+        this.students = students;
     }
 
     public int getLid() {
@@ -37,11 +36,11 @@ public class Laptop {
         this.name = name;
     }
 
-    public Student getStudent() {
-        return student;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

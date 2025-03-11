@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
@@ -12,17 +13,16 @@ public class Student {
     private int id;
     private String name;
     private String address;
-    @OneToMany(mappedBy = "student")
-    private List<Laptop> laptop;
+    @ManyToMany
+    private List<Laptop> laptops;
 
-    public Student() {}
-
-    public Student(int id, String name, String address, List<Laptop> laptop) {
+    public Student(int id, String name, String address, List<Laptop> laptops) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.laptop = laptop;
+        this.laptops = laptops;
     }
+    public Student() {}
 
     public int getId() {
         return id;
@@ -48,11 +48,11 @@ public class Student {
         this.address = address;
     }
 
-    public List<Laptop> getLaptop() {
-        return laptop;
+    public List<Laptop> getLaptops() {
+        return laptops;
     }
 
-    public void setLaptop(List<Laptop> laptop) {
-        this.laptop = laptop;
+    public void setLaptops(List<Laptop> laptops) {
+        this.laptops = laptops;
     }
 }
